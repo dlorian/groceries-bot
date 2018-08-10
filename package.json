@@ -1,0 +1,26 @@
+{
+  "name": "groceries-bot",
+  "version": "1.0.0",
+  "description": "Simple Slack bot to track groceries",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db:start": "docker-compose -f stack.yml up --build",
+    "db:stop": "docker-compose -f stack.yml down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dlorian/groceries-bot.git"
+  },
+  "author": "dlorian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dlorian/groceries-bot/issues"
+  },
+  "homepage": "https://github.com/dlorian/groceries-bot#readme",
+  "dependencies": {
+    "dotenv": "^6.0.0",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.0"
+  }
+}
