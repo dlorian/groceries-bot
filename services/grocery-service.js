@@ -1,19 +1,21 @@
 const dao = require('./../dao');
 
+const Grocery = require('../models/grocery.js');
+
 const findAll = async function(){
-    return await dao.findAll();
+    return dao.findAll();
 };
 
 const findById = async function(id) {
-    return await dao.findById(id);
+    return dao.findById(id);
 };
 
 const add = async function(data) {
-    return await dao.add(data);
+    return dao.add(data);
 };
 
 const deleteById = async function(id) {
-    return await dao.deleteById(id);
+    return dao.deleteById(id);
 };
 
 module.exports = {findAll, findById, add, deleteById};
