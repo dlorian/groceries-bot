@@ -33,9 +33,11 @@ app.get('/groceries', async (req, res) => {
 
     bot.handle('foo');
 
-    bot.handle('list');
+   bot.handle('list bla');
 
-    bot.handle('add Cola 2');
+    //bot.handle('add Cola 2');
+
+//    bot.handle('help');
 
     res.send("Hello world");
 });

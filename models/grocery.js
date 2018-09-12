@@ -1,6 +1,6 @@
 
 module.exports = class Grocery {
-    constructor(name, amount) {
+    constructor(name, amount, user) {
         this.name = name;
         this.amount = amount;
     }
