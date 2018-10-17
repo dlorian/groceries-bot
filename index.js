@@ -6,9 +6,10 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const log = require('./log.js');
-const bot = require('./bot');
+const bot = require('./src/chat-bot');
 
-const groceryService = require('./services/grocery-service.js');
+// Used only for testing prupose here. Needs to be deleted
+const groceryService = require('./src/services/grocery-service.js');
 const app = express();
 
 // You must use a body parser for JSON before mounting the adapter
@@ -34,11 +35,6 @@ app.get('/groceries', async (req, res) => {
     bot.handle('foo');
 
    bot.handle('list bla');
-
-    //bot.handle('add Cola 2');
-
-//    bot.handle('help');
-
     res.send("Hello world");
 });
 

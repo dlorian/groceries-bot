@@ -1,4 +1,4 @@
-const log = require('../log.js');
+const log = require('../../log.js');
 const data = [];
 
 const findAll = async () => {

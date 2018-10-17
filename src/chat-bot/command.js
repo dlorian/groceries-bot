@@ -15,8 +15,8 @@ bot
     });
 
 bot
-    .command('add <name> [amount]')
-    .description('This will adds a new grocery to the list [with optional amount]')
+    .command('add <grocery> [amount]')
+    .description('This will adds a grocery to the list [with amount]')
     .action(async (meta, name, amount) => {
         await service.add({ name, amount });
         bot.send(meta, `You have called the add command with ${name} and ${amount}`);
@@ -29,4 +29,5 @@ bot
         bot.send(meta, message);
     });
 
+    
 module.exports = bot;

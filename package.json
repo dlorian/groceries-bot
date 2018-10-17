@@ -4,6 +4,7 @@
   "description": "Simple Slack bot to track groceries",
   "main": "index.js",
   "scripts": {
+    "cli": "node cli/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:start": "docker-compose up --build",
     "db:stop": "docker-compose down"
@@ -19,7 +20,9 @@
   },
   "homepage": "https://github.com/dlorian/groceries-bot#readme",
   "dependencies": {
+    "@slack/client": "^4.8.0",
     "bot-commander": "^1.1.1",
+    "commander": "^2.19.0",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "mysql2": "^1.6.1",
