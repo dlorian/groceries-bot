@@ -2,6 +2,7 @@
 const log = require('../log.js');
 
 const chatClient = require('../chat-client');
+
 const bot = require('./command.js');
 
 bot.showHelpOnEmpty(true);

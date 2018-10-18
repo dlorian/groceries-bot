@@ -6,8 +6,9 @@ const findById = async function(id) {
     return dao.findById(id);
 };
 
-const add = async function(data) {
-    return dao.add(data);
+const create = async function(options) {
+    const user = new User(options);
+    return dao.persist(user);
 };
 
-module.exports = { findById, add };
+module.exports = { findById, create };

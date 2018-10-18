@@ -1,6 +1,6 @@
 const program = require('commander');
 
-const chatClient = require('../chat-client');
+const slackChat = require('../chat-client').createSlackClient();
 
 program.parse(process.argv);
 
@@ -20,8 +20,7 @@ if(!args.message) {
   return;
 }
 
-chatClient
-.createSlackClient()
+slackChat
 .recipient(args.recipient)
 .message(args.message)
 .send();
