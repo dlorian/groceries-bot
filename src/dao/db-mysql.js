@@ -50,18 +50,30 @@ sequelize
     console.log(result)
   });
 
-  const findAll = async () => {
-    return Promise.reject(new Error('Not yet supported'));
-};
+  module.exports = class MySQLClient {
+    constructor(collection) {
+        log.debug(`Creating DBStub for collection '${collection}'`);
+        this.collection = collection;
+    }
 
-const findById = async (id) => {
-    return Promise.reject(new Error('Not yet supported'));
-};
-
-const add = async (grocery) => {
-    return Promise.reject(new Error('Not yet supported'));
-};
-
-const deleteById = async (id) => {
-    return Promise.reject(new Error('Not yet supported'));
+    findAll() {
+        log.info('find all data');
+        return Promise.resolve(data[this.collection]);
+    };
+    
+    findById(id) {
+        log.info(`find data by id:{}`, id);
+        return Promise.reject(new Error('Not yet supported'));
+    };
+    
+    persist(item) {
+        log.info(`persisting data:{}`, item);
+        data[this.collection].push(item);
+        return Promise.resolve(item);
+    };
+    
+    deleteById(id) {
+        log.info(`delete data with id:{}`, id);
+        return Promise.reject(new Error('Not yet supported'));
+    };
 };

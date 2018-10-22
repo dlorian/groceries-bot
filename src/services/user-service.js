@@ -1,6 +1,11 @@
-const dao = require('./../dao');
+const dao = require('./../dao').init('users');
 
 const User = require('../models/user.js');
+
+const findAll = async function() {
+    const groceries = dao.findAll();
+    groceries.map(el => new Grocery)
+};
 
 const findById = async function(id) {
     return dao.findById(id);

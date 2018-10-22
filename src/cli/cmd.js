@@ -8,7 +8,7 @@ program
     .version(pkg.version)
     .description('CLI for Gracy')
     .command('list', 'Lists groceries')
-    .command('add <grocery> [amount]', 'Add new grocery to the list [with amount]')
+    .command('add <grocery>', 'Add new grocery to the list')
     .command('register <username>', 'Register a user to the Gracy')
     .command('chat <recipient> <message>', 'Sends a message to the recipient')
     
