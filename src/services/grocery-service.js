@@ -1,25 +1,29 @@
-const dao = require('./../dao').init('groceries');
-
 const Grocery = require('../models/grocery.js');
 
-const _createGrocery = (data) => new Grocery(data);
+module.exports = class GroceryService {
+    constructor(dao) {
+        this.dao = dao;
+    }
 
-const findAll = async function () {
-    const groceries = await dao.findAll();
-    return groceries.map(el => _createGrocery(el));
-};
+    _createGrocery(data) {
+        return new Grocery(data);
+    };
 
-const findById = async function (id) {
-    return dao.findById(id);
-};
+    async findAll() {
+        const groceries = await this.dao.findAll();
+        return groceries.map(el => this._createGrocery(el));
+    };
 
-const add = async function (data) {
-    const grocery = _createGrocery(data);
-    return dao.persist(grocery);
-};
+    async findById(id) {
+        return this.dao.findById(id);
+    };
 
-const deleteById = async function (id) {
-    return dao.deleteById(id);
-};
+    async add(data) {
+        const grocery = this._createGrocery(data);
+        return this.dao.persist(grocery);
+    };
 
-module.exports = { findAll, findById, add, deleteById };
+    async delete(id) {
+        return this.dao.deleteById(id);
+    };
+}

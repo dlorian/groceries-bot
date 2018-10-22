@@ -1,4 +1,3 @@
-
 module.exports = class Grocery {
     constructor({ name, amount = 1, addedBy, addedAt }) {
         if(!name) {

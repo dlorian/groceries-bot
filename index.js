@@ -6,42 +6,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const log = require('./log.js');
-const bot = require('./src/chat-bot');
+const routes = require('./routes.js');
 
-// Used only for testing prupose here. Needs to be deleted
-const groceryService = require('./src/services/grocery-service.js');
+const dao = require('./src/dao');
+const slackChat = require('./src/chat-client').createSlackClient();
+const GroceryService = require('./src/services/grocery-service.js');
+const GroceryBot = require('./src/grocery-bot');
+
 const app = express();
-
 // You must use a body parser for JSON before mounting the adapter
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/groceries', async (req, res) => {
-    let text = req.body.text;
+dao.connect()
+    .then(daoManager => {
+        const groceryService = new GroceryService(daoManager.getDao('grocery'));
+        const groceryBot = new GroceryBot(groceryService, slackChat);
+        routes.init(app, groceryService, groceryBot);
 
-    await groceryService.add({
-        name: "Test Grocery 1",
-        amount: 2
-    });
-
-    await groceryService.add({
-        name: "Test Grocery 2",
-        amount: 2
-    });
-
-    const allGrcoeries = await groceryService.findAll();
-    log.info('All grocceries {}', allGrcoeries);
-
-    bot.handle('foo');
-
-   bot.handle('list bla');
-    res.send("Hello world");
-});
-
-app.post('/groceries', (req, res) => {
-    const input = req.body.text;
-});
-
-const server = app.listen(port, () => {
-    log.info('Express server listening on port %d', port);
-});
+        const server = app.listen(port, () => {
+            log.info('Express server listening on port %d', port);
+        });
+    })
+    .catch(err => console.error(err));

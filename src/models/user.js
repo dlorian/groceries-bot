@@ -1,5 +1,3 @@
-
-
 module.exports = class User {
     constructor(options) {
         this.userName = options.userName;

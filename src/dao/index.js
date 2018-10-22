@@ -1,15 +1,41 @@
 const DBStub = require("./db-stub");
-const dbSql = null;//require("./db-mysql");
+
+const GroceryDAO = require('./grocery-dao');
 
 const useDbStub = process.env.USE_DB_STUB;
 
-const createDBClient = (collection) => {
-    if(useDbStub) {
-        return new DBStub(collection);
-    } 
-    return dbSql;
+const mySqlClient = require('./mysql-client');
+
+const stubs = {
+    grocery: () => new DBStub('groceries'),
+    user: () => new DBStub('users')
+};
+
+const dbDaos = {
+    grocery: (dbConnection) => {
+        return new GroceryDAO(dbConnection)
+    }
+};
+
+const DaoManager = class DaoManager {
+    constructor(dbConnection) {
+        this.dbConnection = dbConnection;
+    }
+
+    getDao(dao) {
+        return dbDaos[dao](this.dbConnection);
+    }
 };
 
 module.exports = {
-    init: (collection) => createDBClient(collection)
+    connect: () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const dbConnection = await mySqlClient.getConnection();
+                resolve(new DaoManager(dbConnection));
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
 };

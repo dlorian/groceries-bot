@@ -1,4 +1,4 @@
-const dao = require('./../dao').init('users');
+const dao = require('./../dao').init('user');
 
 const User = require('../models/user.js');
 
