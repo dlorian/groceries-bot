@@ -1,5 +1,7 @@
 const bot = require('bot-commander');
 
+const messageBuilder = require('../chat').createMessageBuilder();
+
 const init = (service) => {
     bot
         .command('list')
@@ -7,8 +9,14 @@ const init = (service) => {
         .action(async meta => {
             try {
                 const response = await service.findAll();
-                bot.send(meta, `That are all groceries I could find: ${response.body}`);
-            } catch(err) {
+
+                const message = messageBuilder
+                    .message('That are all groceries I could find')
+                    .data(response.body, grocery => `${grocery.name} [${grocery.amount}]`)
+                    .build();
+
+                bot.send(meta, message);
+            } catch (err) {
                 console.error(err);
             }
         });
@@ -20,7 +28,7 @@ const init = (service) => {
             try {
                 const response = await service.findById(id);
                 bot.send(meta, `That are all groceries I could find: ${response.body}`);
-            } catch(err) {
+            } catch (err) {
                 console.error(err);
             }
         });

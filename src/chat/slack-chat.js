@@ -1,16 +1,16 @@
 module.exports = class SlackChat {
 
     recipient(recipient) {
-        this.recipient = recipient;
+        this._recipient = recipient;
         return this;
     }
 
     message(message) {
-        this.message = message;
+        this._message = message;
         return this;
     }
 
     send() {
-        console.log(`Send ${this.message} to ${this.recipient}`);
+        console.log(`Send message '${this._message}' to recipient '${this._recipient}'`);
     }
 }

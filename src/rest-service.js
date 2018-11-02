@@ -10,12 +10,12 @@ module.exports = class RestService {
 
     findAll() {
         console.log(`RestService.findAll()`);
-        return got.get(this._getBaseUrl());
+        return got.get(this._getBaseUrl(), { json: true });
     };
 
     findById(id) {
         console.log(`RestService.findById(${id})`);
-        return got.get(this._getBaseUrl() + `/${id}`);
+        return got.get(this._getBaseUrl() + `/${id}`, { json: true });
     };
 
     create(data) {
