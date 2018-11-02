@@ -23,7 +23,7 @@ module.exports = class GroceryBot {
     }
 
     handle(input) {
-        log.info(`Handling input: ${input}`);
+        console.log(`Handling input: ${input}`);
         this.bot.parse(input);
     }
 };

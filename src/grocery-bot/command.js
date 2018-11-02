@@ -3,18 +3,34 @@ const bot = require('bot-commander');
 const init = (service) => {
     bot
         .command('list')
-        .description('This list all know groceries')
+        .description('Lists all groceries')
         .action(async meta => {
-            const groceries = await service.findAll();
-            bot.send(meta, `That are all groceries I could find: ${groceries}`);
+            try {
+                const response = await service.findAll();
+                bot.send(meta, `That are all groceries I could find: ${response.body}`);
+            } catch(err) {
+                console.error(err);
+            }
+        });
+
+    bot
+        .command('get <id>')
+        .description('Load a grocery by the given id')
+        .action(async (meta, id) => {
+            try {
+                const response = await service.findById(id);
+                bot.send(meta, `That are all groceries I could find: ${response.body}`);
+            } catch(err) {
+                console.error(err);
+            }
         });
 
     bot
         .command('add <grocery> [amount]')
         .description('This will adds a grocery to the list [with amount]')
         .action(async (meta, name, amount) => {
-            await service.add({ name, amount });
-            bot.send(meta, `You have called the add command with ${name} and ${amount}`);
+            const response = await service.create({ name, amount });
+            bot.send(meta, `You have called the add command with ${response.body.name} and ${response.body.amount}`);
         });
 
     bot

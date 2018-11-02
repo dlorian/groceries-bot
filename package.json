@@ -4,7 +4,7 @@
   "description": "Simple Slack bot to track groceries",
   "main": "index.js",
   "scripts": {
-    "cli": "node cli/index.js",
+    "cli": "node cli/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,8 @@
   "dependencies": {
     "@slack/client": "^4.8.0",
     "bot-commander": "^1.1.1",
-    "commander": "^2.19.0"
+    "commander": "^2.19.0",
+    "got": "^9.3.0"
   },
   "devDependencies": {}
 }
